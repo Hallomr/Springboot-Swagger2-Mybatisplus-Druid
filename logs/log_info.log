@@ -1,0 +1,19 @@
+2019-11-15 15:27:19.764 [main] INFO  com.example.mybatisplus.MybatisplusApplication - Starting MybatisplusApplication on DESKTOP-ON7HDF0 with PID 21860 (E:\IDEACODE\mybatisplus\target\classes started by zeng in E:\IDEACODE\mybatisplus)
+2019-11-15 15:27:19.769 [main] INFO  com.example.mybatisplus.MybatisplusApplication - The following profiles are active: dev,test,prod
+2019-11-15 15:27:21.032 [main] INFO  o.s.c.s.PostProcessorRegistrationDelegate$BeanPostProcessorChecker - Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-11-15 15:27:21.338 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat initialized with port(s): 8080 (http)
+2019-11-15 15:27:21.348 [main] INFO  org.apache.catalina.core.StandardService - Starting service [Tomcat]
+2019-11-15 15:27:21.348 [main] INFO  org.apache.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/9.0.27]
+2019-11-15 15:27:21.470 [main] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2019-11-15 15:27:21.470 [main] INFO  org.springframework.web.context.ContextLoader - Root WebApplicationContext: initialization completed in 1624 ms
+2019-11-15 15:27:22.009 [main] INFO  com.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+2019-11-15 15:27:22.658 [main] INFO  o.s.scheduling.concurrent.ThreadPoolTaskExecutor - Initializing ExecutorService 'applicationTaskExecutor'
+2019-11-15 15:27:22.898 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Context refreshed
+2019-11-15 15:27:22.917 [main] INFO  s.d.s.web.plugins.DocumentationPluginsBootstrapper - Found 1 custom documentation plugin(s)
+2019-11-15 15:27:22.930 [main] INFO  s.d.spring.web.scanners.ApiListingReferenceScanner - Scanning for api listing references
+2019-11-15 15:27:23.114 [main] INFO  o.s.boot.web.embedded.tomcat.TomcatWebServer - Tomcat started on port(s): 8080 (http) with context path ''
+2019-11-15 15:27:23.118 [main] INFO  com.example.mybatisplus.MybatisplusApplication - Started MybatisplusApplication in 4.221 seconds (JVM running for 5.943)
+2019-11-15 15:27:29.127 [http-nio-8080-exec-1] INFO  o.a.c.core.ContainerBase.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-11-15 15:27:29.127 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2019-11-15 15:27:29.134 [http-nio-8080-exec-1] INFO  org.springframework.web.servlet.DispatcherServlet - Completed initialization in 7 ms
+2019-11-15 15:27:29.403 [http-nio-8080-exec-1] INFO  com.example.mybatisplus.controller.UserController - userList -> PageResp(totalSize=2, totalPage=2, records=[UserResp(id=2, password=2, username=2, status=1, createTime=2019-11-15T23:07:04, updateTime=null)])
