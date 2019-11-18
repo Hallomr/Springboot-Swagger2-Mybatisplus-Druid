@@ -25,5 +25,8 @@
         <if test="userReq!=null and userReq.status!=null">
             and status=#{userReq.status}
         </if>
+        <if test="userReq!=null and userReq.createTime!=null">
+            and create_time=#{userReq.createTime}
+        </if>
     </select>
 </mapper>
