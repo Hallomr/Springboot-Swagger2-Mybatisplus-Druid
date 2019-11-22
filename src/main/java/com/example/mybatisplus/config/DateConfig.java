@@ -1,5 +1,6 @@
 package com.example.mybatisplus.config;
 
+import com.example.mybatisplus.common.enums.MyJacksonAnnotationIntrospector;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -140,6 +141,7 @@ public class DateConfig {
         });
 
         objectMapper.registerModule(javaTimeModule);
+        objectMapper.setAnnotationIntrospector(new MyJacksonAnnotationIntrospector());
         return objectMapper;
     }
 

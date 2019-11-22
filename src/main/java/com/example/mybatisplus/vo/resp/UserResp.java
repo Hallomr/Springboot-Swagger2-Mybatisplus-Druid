@@ -1,5 +1,7 @@
 package com.example.mybatisplus.vo.resp;
 
+import com.example.mybatisplus.common.enums.IEnum;
+import com.example.mybatisplus.common.enums.StatusEnum;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -21,6 +23,7 @@ public class UserResp {
     private String username;
 
     @ApiModelProperty(value = "状态 1启用 0 停用")
+    @IEnum(StatusEnum.class)
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")
