@@ -16,7 +16,8 @@ public class MybatisPlusConfig {
     @Bean
     public PaginationInterceptor paginationInterceptor(){
         PaginationInterceptor paginationInterceptor = new PaginationInterceptor();
-        paginationInterceptor.setDialectType("mysql");
+        //paginationInterceptor.setDialectType("mysql");
+        paginationInterceptor.setDialectType("postgresql");
         return paginationInterceptor;
     }
 

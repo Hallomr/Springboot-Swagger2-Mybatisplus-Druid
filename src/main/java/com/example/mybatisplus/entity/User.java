@@ -1,7 +1,9 @@
 package com.example.mybatisplus.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -23,6 +25,7 @@ import java.time.LocalDateTime;
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 @ApiModel(value="User对象", description="")
+@TableName(value = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -46,5 +49,7 @@ public class User implements Serializable {
     @ApiModelProperty(value = "更新时间")
     private LocalDateTime updateTime;
 
-
+    @ApiModelProperty(value = "相关内容")
+    @TableField(el = "content,typeHandler=com.example.mybatisplus.common.handler.JsonTypeHandler")
+    private Content content;
 }

@@ -2,6 +2,7 @@ package com.example.mybatisplus.vo.resp;
 
 import com.example.mybatisplus.common.enums.IEnum;
 import com.example.mybatisplus.common.enums.StatusEnum;
+import com.example.mybatisplus.entity.Content;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -12,7 +13,7 @@ import java.time.LocalDateTime;
 @Data
 @ApiModel(value = "user响应实体类")
 @JsonInclude(JsonInclude.Include.ALWAYS)
-public class UserResp {
+public class UserResp  {
     @ApiModelProperty(value = "主键id")
     private Integer id;
 
@@ -33,4 +34,7 @@ public class UserResp {
     @ApiModelProperty(value = "更新时间")
     //@JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updateTime;
+
+    //@TableField(el = "content,typeHandler=com.example.mybatisplus.common.handler.JsonTypeHandler")
+    private Content content;
 }

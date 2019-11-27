@@ -13,6 +13,7 @@ import java.lang.reflect.Field;
 public class EnumSerializer extends JsonSerializer<Object> {
     @Override
     public void serialize(Object var1, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException {
+
         jsonGenerator.writeObject(var1);
         JsonStreamContext outputContext = jsonGenerator.getOutputContext();
         String currentName = outputContext.getCurrentName();
