@@ -12,7 +12,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
+/*
+* @ResponseStatus设置Headers Status Code
+* ResultEnum.NOT_FOUND.get()为自定义状态码
+*自定义状态码在Response Body展示 HttpStatus状态码在Headers Status Code展示
+* */
 @RestControllerAdvice
 @Slf4j
 public class GlobalDefaultExceptionHandler {
@@ -46,6 +50,7 @@ public class GlobalDefaultExceptionHandler {
      * HttpMessageNotReadableException 参数错误异常
      */
     @ExceptionHandler({HttpMessageNotReadableException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result handleHttpMessageNotReadableException(HttpMessageNotReadableException e) {
         log.error("参数序列化异常 -> {}",e.getMessage());
         return ResultEnum.PARAMETER_ERROR.get();
@@ -62,6 +67,7 @@ public class GlobalDefaultExceptionHandler {
      * BindException 参数错误异常
      */
     @ExceptionHandler({BindException.class,MethodArgumentNotValidException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result handleMethodArgumentNotValidException(Exception e) {
         log.error("请求参数错误",e.getMessage());
         return ResultEnum.PARAMETER_ERROR.get();
