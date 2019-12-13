@@ -1,10 +1,12 @@
 package com.example.mybatisplus.service;
 
-import com.example.mybatisplus.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.vo.req.UserReq;
 import com.example.mybatisplus.vo.resp.PageResp;
 import com.example.mybatisplus.vo.resp.UserResp;
+
+import java.util.List;
 
 /**
  * <p>
@@ -17,4 +19,6 @@ import com.example.mybatisplus.vo.resp.UserResp;
 public interface UserService extends IService<User> {
 
     PageResp<UserResp> getUserList(UserReq userReq);
+
+    boolean save(List<Object> list);
 }

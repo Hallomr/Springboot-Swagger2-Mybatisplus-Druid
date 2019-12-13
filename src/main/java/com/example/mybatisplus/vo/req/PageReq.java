@@ -10,23 +10,31 @@ public class PageReq {
 
     public Integer getPageNum() {
         if(pageNum<1){
-            pageNum=1;
+            this.pageNum=1;
         }
         return pageNum;
     }
 
     public void setPageNum(Integer pageNum) {
-        this.pageNum = pageNum;
+        if(pageNum==null){
+            this.pageNum = 1;
+        }else {
+            this.pageNum = pageNum;
+        }
     }
 
     public Integer getPageSize() {
         if(pageSize<1){
-            pageSize=1;
+            this.pageSize=10;
         }
         return pageSize;
     }
 
     public void setPageSize(Integer pageSize) {
-        this.pageSize = pageSize;
+        if(pageSize==null){
+            this.pageSize = 10;
+        }else {
+            this.pageSize = pageSize;
+        }
     }
 }

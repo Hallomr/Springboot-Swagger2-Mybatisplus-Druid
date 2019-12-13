@@ -2,6 +2,7 @@ package com.example.mybatisplus;
 
 import com.example.mybatisplus.common.ResultEnum;
 import com.example.mybatisplus.entity.User;
+import com.example.mybatisplus.service.UserService;
 import com.example.mybatisplus.vo.resp.DateResp;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -119,4 +120,12 @@ class MybatisplusApplicationTests {
         System.out.println(oneDay);
     }
 
+    @Test
+    public void instance(){
+        Object user = new User();
+        if(user instanceof UserService){
+            System.out.println("test.......");
+        }
+
+    }
 }

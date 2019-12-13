@@ -39,4 +39,14 @@
             and create_time=#{userReq.createTime}
         </if>
     </select>
+
+    <select id="insertBatch">
+        insert into users(password,username,status,create_time,update_time)
+        values
+        <foreach collection="users" index="index" item="item" separator=",">
+            (
+            #{item.password},#{item.username},#{item.status},#{item.createTime},#{item.updateTime}
+            )
+        </foreach>
+    </select>
 </mapper>
