@@ -80,6 +80,21 @@ public class UserController {
         }
     }
 
+    @GetMapping("/downloadModel")
+    public void downloadModel(HttpServletResponse response){
+        try {
+            // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+            String fileName = URLEncoder.encode("模板", "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            EasyExcel.write(response.getOutputStream(), User.class).sheet("模板").doWrite(userService.list());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     /**
      * 文件上传
      * <p>
@@ -95,5 +110,7 @@ public class UserController {
         EasyExcel.read(file.getInputStream(), UserEntity.class, new UploadDataListener(userService)).sheet().doRead();
         return "success";
     }
+
+
 }
 
