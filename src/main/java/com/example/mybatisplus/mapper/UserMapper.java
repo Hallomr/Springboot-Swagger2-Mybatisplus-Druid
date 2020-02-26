@@ -15,7 +15,7 @@ import java.util.List;
  *  Mapper 接口
  * </p>
  *
- * @author generator
+ * @author generatorF
  * @since 2019-11-14
  */
 public interface UserMapper extends BaseMapper<User> {

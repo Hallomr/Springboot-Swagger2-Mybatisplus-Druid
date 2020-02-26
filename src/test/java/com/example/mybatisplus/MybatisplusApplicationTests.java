@@ -4,6 +4,9 @@ import com.example.mybatisplus.common.ResultEnum;
 import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.service.UserService;
 import com.example.mybatisplus.vo.resp.DateResp;
+import com.google.common.base.Joiner;
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
@@ -126,6 +129,24 @@ class MybatisplusApplicationTests {
         if(user instanceof UserService){
             System.out.println("test.......");
         }
+
+    }
+
+    @Test
+    public void guava(){
+        //连接器
+        Joiner joiner = Joiner.on(",").skipNulls();
+        //分割器
+        Splitter splitter = Splitter.on(",").trimResults().omitEmptyStrings();
+        ArrayList<String> strings = Lists.newArrayList("hh", null, "xx");
+        String join = joiner.join(strings);
+        System.out.println(join);
+
+        Iterable<String> split = splitter.split(" a,   b,");
+        for (String s : split) {
+            System.out.println(s);
+        }
+
 
     }
 }
