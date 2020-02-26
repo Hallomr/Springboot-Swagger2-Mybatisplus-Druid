@@ -1,0 +1,5 @@
+upload:
+  #localtion: ${UPLOAD_DIR:/home/data/test}
+  localtion: ${UPLOAD_DIR:D:\zip}
+  maxFileSize: 10240KB
+  maxRequestSize: 102400KB
