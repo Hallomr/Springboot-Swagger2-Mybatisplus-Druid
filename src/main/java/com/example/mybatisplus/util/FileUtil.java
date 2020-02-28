@@ -1,8 +1,10 @@
 package com.example.mybatisplus.util;
+
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -208,7 +210,7 @@ public class FileUtil {
         }
         ZipFile zipFile = null;
         try {
-            zipFile = new ZipFile(file);
+            zipFile = new ZipFile(file,Charset.forName("GBK"));
             Enumeration<?> entries = zipFile.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = (ZipEntry) entries.nextElement();

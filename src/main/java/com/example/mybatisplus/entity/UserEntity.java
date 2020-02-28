@@ -1,5 +1,6 @@
 package com.example.mybatisplus.entity;
 
+import com.alibaba.excel.annotation.ExcelProperty;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -16,23 +17,23 @@ public class UserEntity  {
     private Integer id;
 
     @ApiModelProperty(value = "用户密码")
-    //@ExcelProperty("用户密码")
+    @ExcelProperty("用户密码")
     private String password;
 
     @ApiModelProperty(value = "用户名")
-    //@ExcelProperty("用户名")
+    @ExcelProperty("用户名")
     private String username;
 
     @ApiModelProperty(value = "状态 1启用 0 停用")
-    //@ExcelProperty("用户状态")
+    @ExcelProperty("用户状态")
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")
-    //@ExcelProperty("创建时间")
+    @ExcelProperty("创建时间")
     private Date createTime;
 
     @ApiModelProperty(value = "更新时间")
-    //@ExcelProperty("更新时间")
+    @ExcelProperty("更新时间")
     private Date updateTime;
 
     /*@ApiModelProperty(value = "相关内容")
