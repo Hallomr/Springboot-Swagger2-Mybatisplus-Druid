@@ -20,5 +20,5 @@ public interface UserService extends IService<User> {
 
     PageResp<UserResp> getUserList(UserReq userReq);
 
-    boolean save(List<Object> list);
+    boolean save(List<Object> list,boolean isFinish);
 }

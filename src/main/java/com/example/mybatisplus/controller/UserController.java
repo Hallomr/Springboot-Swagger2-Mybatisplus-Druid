@@ -3,10 +3,12 @@ package com.example.mybatisplus.controller;
 
 import com.alibaba.excel.EasyExcel;
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.example.mybatisplus.common.listener.UploadDataListener;
 import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.entity.UserEntity;
 import com.example.mybatisplus.service.UserService;
+import com.example.mybatisplus.util.LoadCache;
 import com.example.mybatisplus.vo.req.UserReq;
 import com.example.mybatisplus.vo.resp.PageResp;
 import com.example.mybatisplus.vo.resp.UserResp;
@@ -23,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -80,6 +83,7 @@ public class UserController {
         }
     }
 
+
     @GetMapping("/downloadModel")
     public void downloadModel(HttpServletResponse response){
         try {
@@ -111,6 +115,23 @@ public class UserController {
         return "success";
     }
 
+    @GetMapping("/error")
+    public void downloadError(HttpServletResponse response){
+        try {
+            // 这里注意 有同学反应使用swagger 会导致各种问题，请直接用浏览器或者用postman
+            response.setContentType("application/vnd.ms-excel");
+            response.setCharacterEncoding("utf-8");
+            // 这里URLEncoder.encode可以防止中文乱码 当然和easyexcel没有关系
+            String fileName = URLEncoder.encode("error", "UTF-8");
+            response.setHeader("Content-disposition", "attachment;filename=" + fileName + ".xlsx");
+            Object error = LoadCache.getLoadingCache("errorData");
+            String s = JSONObject.toJSONString(error);
+            List<UserEntity> userEntities = JSONObject.parseArray(s, UserEntity.class);
+            EasyExcel.write(response.getOutputStream(), UserEntity.class).sheet("error").doWrite(userEntities);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 }
 

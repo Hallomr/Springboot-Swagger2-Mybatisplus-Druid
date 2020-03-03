@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
@@ -56,22 +58,24 @@ public class UploadZipServiceImpl implements UploadZipService {
                 @Override
                 public void run() {
                     List<File> fileList = new ArrayList<>();
-                    fileList = fileUtil.getSubFiles(desPath,fileList);
-                    for (File oneFile : fileList){
-                        if (oneFile.getName().toLowerCase().endsWith(".xls") || oneFile.getName().toLowerCase().endsWith(".xlsx") ) {
-                            try {
-                                //解析处理excel文件
-                                parseExcelFile(oneFile,uuid);
-                            } catch (Exception e) {
-                                log.error(e.getMessage());
+                    fileList = fileUtil.getXlsFiles(desPath, fileList);
+                    for (File oneFile : fileList) {
+
+                        try {
+                            List<File> imageList = new ArrayList<>();
+                            imageList = fileUtil.getImageFiles(desPath + "\\案件\\图片", imageList);
+                            for (File file1 : imageList) {
+                                BufferedImage sourceImg = ImageIO.read(new FileInputStream(file1));
+                                sourceImg.getHeight();
+                                sourceImg.getWidth();
                             }
-                        }else if(oneFile.getName().toLowerCase().endsWith(".jpg")) {
-                            try {
-                                //解析处理图片文件
-                                parseImageFile(oneFile,uuid);
-                            } catch (Exception e) {
-                                log.error(e.getMessage());
-                            }
+                            System.out.println(imageList);
+                            //解析处理图片文件
+                            parseImageFile(oneFile, uuid);
+                            //解析处理excel文件
+                            parseExcelFile(oneFile, uuid);
+                        } catch (Exception e) {
+                            log.error(e.getMessage());
                         }
                     }
 
@@ -148,6 +152,10 @@ public class UploadZipServiceImpl implements UploadZipService {
     }
 
     private void parseImageFile(File file, String uuid) throws Exception {
+        FileInputStream fileInputStream = new FileInputStream(file);
+        BufferedImage image = ImageIO.read(fileInputStream);
+        int width = image.getWidth();
+        System.out.println("图片宽度："+width);
 
         /*String imgStr ="";
         //        FileInputStream fis = new FileInputStream(file);

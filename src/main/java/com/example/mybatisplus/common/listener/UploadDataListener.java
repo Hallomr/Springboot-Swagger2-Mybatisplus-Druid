@@ -20,6 +20,10 @@ public class UploadDataListener extends AnalysisEventListener<Object> {
      */
     private static final int BATCH_COUNT = 5;
     List<Object> list = new ArrayList<>();
+
+    //解析完毕
+    private boolean isFinish = false;
+
     /**
      * 假设这个是一个DAO，当然有业务逻辑这个也可以是一个service。当然如果不用存储这个对象没用。
      */
@@ -48,6 +52,9 @@ public class UploadDataListener extends AnalysisEventListener<Object> {
     @Override
     public void invoke(Object data, AnalysisContext context) {
         log.info("解析到一条数据:{}", JSON.toJSONString(data));
+        if(context.getTotalCount()-1==context.getCurrentRowNum()){
+            isFinish = true;
+        }
         list.add(data);
         // 达到BATCH_COUNT了，需要去存储一次数据库，防止数据几万条数据在内存，容易OOM
         if (list.size() >= BATCH_COUNT) {
@@ -81,7 +88,7 @@ public class UploadDataListener extends AnalysisEventListener<Object> {
     private void saveData() {
         log.info("{}条数据，开始存储数据库！", list.size());
         UserService userService = (UserService)service;
-        userService.save(list);
+        userService.save(list,isFinish);
         log.info("存储数据库成功！");
     }
 }

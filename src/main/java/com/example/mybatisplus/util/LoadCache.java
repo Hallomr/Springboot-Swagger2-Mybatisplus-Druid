@@ -1,5 +1,7 @@
 package com.example.mybatisplus.util;
 
+
+
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
 import com.google.common.cache.LoadingCache;
@@ -32,4 +34,6 @@ public class LoadCache {
             return null;
         }
     }
+
+
 }

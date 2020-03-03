@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
@@ -18,14 +20,17 @@ public class UserEntity  {
 
     @ApiModelProperty(value = "用户密码")
     @ExcelProperty("用户密码")
+    @NotBlank(message = "用户密码(必填)")
     private String password;
 
     @ApiModelProperty(value = "用户名")
     @ExcelProperty("用户名")
+    @NotBlank(message = "用户名(必填)")
     private String username;
 
     @ApiModelProperty(value = "状态 1启用 0 停用")
     @ExcelProperty("用户状态")
+    @NotNull(message = "用户状态(必填)")
     private Integer status;
 
     @ApiModelProperty(value = "创建时间")

@@ -7,16 +7,18 @@ import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.entity.UserEntity;
 import com.example.mybatisplus.mapper.UserMapper;
 import com.example.mybatisplus.service.UserService;
+import com.example.mybatisplus.util.LoadCache;
 import com.example.mybatisplus.vo.req.UserReq;
 import com.example.mybatisplus.vo.resp.PageResp;
 import com.example.mybatisplus.vo.resp.UserResp;
+import org.ehcache.shadow.org.terracotta.statistics.Statistic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.TreeSet;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.xml.validation.Validator;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -29,6 +31,10 @@ import java.util.stream.Collectors;
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
+    private javax.validation.Validator validator =  Validation.buildDefaultValidatorFactory().getValidator();
+    //校验异常数据
+    private static List<UserEntity> userEntities = new ArrayList<>();
+
     @Autowired
     private UserMapper userMapper;
 
@@ -48,16 +54,40 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     }
 
     @Override
-    public boolean save(List<Object> list) {
+    public boolean save(List<Object> list,boolean isFinish) {
         //导入前对数据去重
         List<UserEntity> users = list.stream().map(u -> {
             return (UserEntity) u;
         }).collect(Collectors.toList());
+
+        //入库数据
+        List<UserEntity> temp = new ArrayList<>();
+
+        //校验
+        for (UserEntity user : users) {
+            Set<ConstraintViolation<UserEntity>> validate = validator.validate(user);
+            if(!validate.isEmpty()){
+                for (ConstraintViolation<UserEntity> v : validate) {
+                    String message = v.getMessage();
+                    System.out.println(message);
+                }
+                userEntities.add(user);
+            }else{
+                temp.add(user);
+            }
+        }
+
+        //解析excel完毕,异常数据放入内存
+        if(isFinish){
+            LoadCache.putLoadingCache("errorData",userEntities);
+            userEntities = null;
+        }
+
         //对excel中username重复数据去重
-        users = users.stream()
+        temp = temp.stream()
                 .collect(Collectors.collectingAndThen(Collectors.toCollection(() -> new TreeSet<>(Comparator.comparing(UserEntity::getUsername))), ArrayList::new));
         //对数据库存在数据去重
-        users.removeIf(s -> {
+        temp.removeIf(s -> {
             QueryWrapper<User> userQueryWrapper = new QueryWrapper<User>().eq("username",s.getUsername());
             if(userMapper.selectList(userQueryWrapper).size()>0){
                 return true;
@@ -65,8 +95,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
             return false;
         });
         //userMapper.insertBatch(users);
-        if(users.size()>0) {
-            userMapper.insertBatch(users);
+        if(temp.size()>0) {
+            userMapper.insertBatch(temp);
         }
         return true;
     }

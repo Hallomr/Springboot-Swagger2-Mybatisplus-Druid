@@ -297,4 +297,37 @@ public class FileUtil {
         return fileList;
     }
 
+    public List<File> getXlsFiles(String  desFile,List<File> fileList) {
+        File file = new File(desFile);
+        File[] files = file.listFiles();
+        for (File fileIndex : files) {
+            if (!fileIndex.exists()) {
+                throw new NullPointerException("Cannot find " + fileIndex);
+            } else if (fileIndex.isFile()&&(fileIndex.getName().toLowerCase().endsWith(".xls") || fileIndex.getName().toLowerCase().endsWith(".xlsx") )) {
+                fileList.add(fileIndex);
+            } else {
+                if (fileIndex.isDirectory()) {
+                    getXlsFiles(fileIndex.getAbsolutePath(),fileList);
+                }
+            }
+        }
+        return fileList;
+    }
+
+    public List<File> getImageFiles(String  desFile,List<File> fileList) {
+        File file = new File(desFile);
+        File[] files = file.listFiles();
+        for (File fileIndex : files) {
+            if (!fileIndex.exists()) {
+                throw new NullPointerException("Cannot find " + fileIndex);
+            } else if (fileIndex.isFile()&&fileIndex.getName().toLowerCase().endsWith(".jpg")) {
+                fileList.add(fileIndex);
+            } else {
+                if (fileIndex.isDirectory()) {
+                    getImageFiles(fileIndex.getAbsolutePath(),fileList);
+                }
+            }
+        }
+        return fileList;
+    }
 }
