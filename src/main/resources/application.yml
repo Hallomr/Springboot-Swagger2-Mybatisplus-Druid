@@ -3,3 +3,10 @@ upload:
   localtion: ${UPLOAD_DIR:D:\zip}
   maxFileSize: 10240KB
   maxRequestSize: 102400KB
+
+# 文件系统
+minio:
+  url: http://127.0.0.1:9000
+  access-key: xxxxxxxxx
+  secret-key: xxxxxxxx
+  bucket-name: zdrjy

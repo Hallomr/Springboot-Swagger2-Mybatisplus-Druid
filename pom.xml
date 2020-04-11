@@ -112,6 +112,43 @@
             <version>2.6.1</version>
         </dependency>
 
+        <!--minio文件系统-->
+        <dependency>
+            <groupId>io.minio</groupId>
+            <artifactId>minio</artifactId>
+            <version>6.0.2</version>
+        </dependency>
+
+        <!--word转pdf-->
+        <!--<dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.10.1</version>
+        </dependency>-->
+        <dependency>
+           <groupId>fr.opensagres.xdocreport</groupId>
+            <artifactId>org.apache.poi.xwpf.converter.pdf</artifactId>
+            <version>1.0.6</version>
+        </dependency>
+
+        <!-- 签名需要 -->
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>1.49</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcpkix-jdk15on</artifactId>
+            <version>1.49</version>
+        </dependency>
+
         <!-- 日志 -->
         <dependency>
             <groupId>org.slf4j</groupId>
